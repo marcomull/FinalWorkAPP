@@ -6,7 +6,8 @@ function RoutesComponent() {
     return (
         <BrowserRouter>
             <Routes>
-
+                <Route exact path="/" Component={MaintenanceSelection} />
+                <Route exact path="/maintenanceStartRequest" Component={MaintenanceStartRequest} />
             </Routes>
         </BrowserRouter>
     );
