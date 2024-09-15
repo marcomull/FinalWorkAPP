@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Stylesheet/style.css'; // Asegúrate de que la ruta sea correcta
+import '../Stylesheet/style.css'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function MaintenanceStartRequest() {
