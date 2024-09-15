@@ -5,3 +5,7 @@ Lazo Medina Abel Alejandro        Abelazo16
 Talavera Diaz Juan Luis           JuanLuisTalavera
 Gomes Reyes Christopher Enrique   ChristopherGR03
 Bustinza Sucre Julio              Julio-BS
+
+
+uso de Node, React y se uso boostrap npm install bootstrap
+
