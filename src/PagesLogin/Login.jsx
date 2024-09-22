@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Stylesheet/style.css';
+import NavigationBar from '../Navigator/Navigator';
 
 export default function Login() {
     return (
@@ -8,14 +9,10 @@ export default function Login() {
             <header>
                 <h1 className="titulo">Transportes la libertad<span>Agency</span></h1>
             </header>
-            <nav className="nav-principal" style={{ backgroundColor: '#b9fdfd' }}>
-            <a className="enlace" href="">Inicio</a>
-                <a className="enlace" href="">Administrador</a>
-                <a className="enlace" href="">Mecanico</a>
-                <a className="enlace" href="">Almacen</a>
-                <a className="enlace" href="">Registrar</a>
-                <a className="enlace" href="">Salir</a>
-            </nav>
+            <NavigationBar>
+
+            </NavigationBar>
+
             <div className="container">
                 <div className="col-lg-12">
                     <h1>Iniciar Sesion</h1>
