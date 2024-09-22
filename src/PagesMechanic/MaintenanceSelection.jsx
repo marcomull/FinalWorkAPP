@@ -2,24 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../Stylesheet/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NavigationBar from '../Navigator/Navigator';
 
 export default function MaintenanceSelection() {
     return (
         <div>
             <header>
-                <h1 className="titulo">
-                    Transportes la libertad<span>Agency</span>
-                </h1>
+                <h1 className="titulo">Transportes la libertad<span>Agency</span></h1>
             </header>
+            <NavigationBar>
 
-            <nav className="nav-principal" style={{ backgroundColor: '#b9fdfd' }}>
-                <a className="enlace" href="">Inicio</a>
-                <a className="enlace" href="">Administrador</a>
-                <a className="enlace" href="">Mecanico</a>
-                <a className="enlace" href="">Almacen</a>
-                <a className="enlace" href="">Registrar</a>
-                <a className="enlace" href="">Salir</a>
-            </nav>
+            </NavigationBar>
 
             <div className="container d-flex justify-content-center align-items-center">
                 <div className="row text-center">

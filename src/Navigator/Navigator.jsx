@@ -8,7 +8,7 @@ const NavigationBar = () => {
             <a className="enlace" href="#">Inicio</a>
             <a className="enlace" href="#">Administrador</a>
             <a className="enlace" href="#">Mecanico</a>
-            <a className="enlace" href="/SpareParts">SpareParts</a>
+            <a className="enlace" href="#">Logistica</a>
             <a className="enlace" href="#">Registrar</a>
             <a className="enlace" href="#">Salir</a>
         </nav>

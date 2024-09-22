@@ -1,6 +1,7 @@
 import React from 'react';
 import '../Stylesheet/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NavigationBar from '../Navigator/Navigator';
 
 export default function AddRequest() {
 
@@ -9,15 +10,9 @@ export default function AddRequest() {
             <header>
                 <h1 className="titulo">Transportes la libertad<span>Agency</span></h1>
             </header>
+            <NavigationBar>
 
-            <nav className="nav-principal" style={{ backgroundColor: '#b9fdfd' }}>
-                <a className="enlace" href="">Inicio</a>
-                <a className="enlace" href="">Administrador</a>
-                <a className="enlace" href="">Mecanico</a>
-                <a className="enlace" href="">Almacen</a>
-                <a className="enlace" href="">Registrar</a>
-                <a className="enlace" href="">Salir</a>
-            </nav>
+            </NavigationBar>
 
             <div className="container my-5">
                 <div className="row justify-content-center">
