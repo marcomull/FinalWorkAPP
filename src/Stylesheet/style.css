@@ -382,16 +382,21 @@ main
 }
 
 .container {
-    max-width: 400px; /* Ancho máximo del contenedor del formulario */
     width: 100%;
+    max-width: none;
+    padding: 20px; /* Ajusta el valor según el espacio deseado */
+    box-sizing: border-box; /* Incluye el padding en el ancho total */
 }
+
 
 .table, td, th {
     font-size: 12px; /* Aumenta el tamaño de fuente de toda la tabla */
 }
 
 .table {
-    border-spacing: 12px; /* Espaciado entre celdas de la tabla */
+    width: 100%; /* La tabla ocupará todo el ancho disponible */
+    border-spacing: 12px; /* Espaciado entre celdas */
+    border-collapse: collapse; /* Asegura que las celdas estén bien alineadas */
 }
 
 .table th, .table td {
@@ -400,6 +405,7 @@ main
 
 .btn, .btn-sm {
     font-size: 12px; /* Aumenta el tamaño de fuente de los botones */
+    margin: 5px 0; /* Espacio vertical entre botones */
 }
 
 .form-group {
