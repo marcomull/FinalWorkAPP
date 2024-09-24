@@ -17,16 +17,29 @@ export default function MaintenanceSelection() {
             <div class="container d-flex justify-content-center align-items-center">
                 <div class="row text-center">
                     <h1>Administrador</h1>
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <Link className="btn btn-success mx-2" to="/addRegister">Agregar Nuevo</Link>
+                    <div class="">
+
+                    <div className="row mb-3">
+                    <div className="col-lg-8 ">
                         <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
-                        <form id="exportForm" action="ControladorAdministrador" method="POST">
+                        </div>
+                        <div className="col-lg-2">
+                        <Link className="btn btn-success w-100 mx-2" to="/addRegister">Agregar Nuevo</Link>
+                        </div>
+                        
+                        <div className="col-lg-2">
+                            
+                        <form id="exportForm" action="ControladorAdministrador" className='w-100' method="POST">
                             <input type="hidden" name="accion" value="exportarExcel"></input>
-                            <button class="btn btn-danger btn-sm" type="submit">Exportar Excel</button>
+                            <button class="btn btn-danger btn-sm w-100" type="submit">Exportar Excel</button>
                         </form>
+                    </div>
+                        </div>
+                      
+                       
                     </div>
                     <table class="table table-striped table-primary" border="1">
                         <thead>
