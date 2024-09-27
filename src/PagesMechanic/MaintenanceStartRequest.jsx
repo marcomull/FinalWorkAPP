@@ -1,5 +1,6 @@
 import React from 'react';
-import '../Stylesheet/style.css'; 
+import '../Stylesheet/style.css';
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '../Navigator/Navigator';
 
@@ -27,35 +28,35 @@ export default function MaintenanceStartRequest() {
                     <section className="table-container">
                         <table className="table table-striped table-primary">
                             <thead>
-                            <tr className="cell text-center">
-                                <th>ID</th>
-                                <th>Inicio de reparación</th>
-                                <th>Repuestos</th>
-                                <th>Fin de reparación</th>
-                                <th>Opciones</th>
-                            </tr>
+                                <tr className="cell text-center">
+                                    <th>ID</th>
+                                    <th>Inicio de reparación</th>
+                                    <th>Repuestos</th>
+                                    <th>Fin de reparación</th>
+                                    <th>Opciones</th>
+                                </tr>
                             </thead>
                             <tbody className="table-group-divider">
-                            <tr>
-                                <td className="cell text-center">1</td>
-                                <td className="cell text-center">2024-05-01</td>
-                                <td className="cell text-center">Repuesto A, Repuesto B</td>
-                                <td className="cell text-center">2024-05-03</td>
-                                <td className="cell text-center">
-                                    <a className="btn btn-success" href="">Finalizar</a>
-                                    <a className="btn btn-success" href="">Solicitar</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="cell text-center">2</td>
-                                <td className="cell text-center">2024-05-02</td>
-                                <td className="cell text-center">Repuesto C</td>
-                                <td className="cell text-center">2024-05-04</td>
-                                <td className="cell text-center">
-                                    <a className="btn btn-success" href="">Finalizar</a>
-                                    <a className="btn btn-success" href="">Solicitar</a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td className="cell text-center">1</td>
+                                    <td className="cell text-center">2024-05-01</td>
+                                    <td className="cell text-center">Repuesto A, Repuesto B</td>
+                                    <td className="cell text-center">2024-05-03</td>
+                                    <td className="cell text-center">
+                                        <a className="btn btn-success" href="">Finalizar</a>
+                                        <Link className="btn btn-success" to="/addRequest">Solicitar</Link>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="cell text-center">2</td>
+                                    <td className="cell text-center">2024-05-02</td>
+                                    <td className="cell text-center">Repuesto C</td>
+                                    <td className="cell text-center">2024-05-04</td>
+                                    <td className="cell text-center">
+                                        <a className="btn btn-success" href="">Finalizar</a>
+                                        <Link className="btn btn-success" to="/addRequest">Solicitar</Link>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </section>
