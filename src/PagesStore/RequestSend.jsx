@@ -2,6 +2,7 @@ import React from 'react';
 import '../Stylesheet/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '../Navigator/Navigator';
+import {Link} from 'react-router-dom';
 
 export default function RequestSend() {
     return (
@@ -46,12 +47,8 @@ export default function RequestSend() {
                                 <td className="cell text-center">ABC123</td>
                                 <td className="cell text-center">Anonimo</td>
                                 <td className="cell text-center">
-                                    <a className="btn btn-primary" href="/verificarRepuesto">
-                                        Solicitar
-                                    </a>
-                                    <a className="btn btn-primary" href="/enviarRepuesto">
-                                        Enviar Repuesto
-                                    </a>
+                                    <Link className="btn btn-primary" to="/spareParts">Solicitar</Link>
+                                    <a className="btn btn-primary" href="/enviarRepuesto">Enviar Repuesto</a>
                                 </td>
                             </tr>
                         ))}
