@@ -6,7 +6,9 @@ import AddRegister from "../PagesAdmin/AddRegister"
 import MaintenanceSelectionMechanic from "../PagesMechanic/MaintenanceSelection";
 import MaintenanceStartRequest from "../PagesMechanic/MaintenanceStartRequest";
 import AddRequest from "../PagesMechanic/AddRequest";
+import RequestSend from "../PagesStore/RequestSend";
 import Index from "../PageIndex/Index";
+import SpareParts from "../PagesStore/SpareParts";
 
 function RoutesComponent() {
     return (
@@ -19,6 +21,8 @@ function RoutesComponent() {
                 <Route path="/mecanico" element={<MaintenanceSelectionMechanic />} />
                 <Route path="/maintenanceStartRequest" element={<MaintenanceStartRequest/>} />
                 <Route path="/addRequest" element={<AddRequest/>} />
+                <Route path="/logistica" element={<RequestSend/>} />
+                <Route path="/requestSend" element={<SpareParts/>} />
             </Routes>
         </BrowserRouter>
     );
