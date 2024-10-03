@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 import '../Stylesheet/style.css';
 import NavigationBar from '../Navigator/Navigator';
 
@@ -29,7 +30,7 @@ export default function Login() {
                         <input className="form-control" type="password" name="txtPasswordLogin" /><br />
                         <input className="btn btn-success form-control" type="submit" name="accion" value="IngresarUsuario" /><br />
                         <br />
-                        <input className="btn btn-success form-control" type="submit" name="accion" value="RegistrarLogin" /><br />
+                        <Link className="btn btn-success form-control" to="/register" type="submit">Registrar</Link><br />
                     </form>
                 </div>
             </div>
