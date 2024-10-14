@@ -8,16 +8,15 @@ import NavigationBar from '../Navigator/Navigator';
 export default function MaintenanceSelection() {
     const [maintenanceDetails, setMaintenanceDetails] = useState([]);
 
-    // Fetch data from the backend
     useEffect(() => {
-        axios.get('http://localhost:8080/maintenance/administrator')  // Ajusta la URL según la configuración de tu backend
+        axios.get('http://localhost:8080/maintenance/administrator')  
             .then(response => {
-                setMaintenanceDetails(response.data);  // Actualiza el estado con los datos obtenidos
+                setMaintenanceDetails(response.data); 
             })
             .catch(error => {
                 console.error("Error fetching maintenance data", error);
             });
-    }, []);  // El segundo argumento [] asegura que la llamada solo se haga una vez cuando se monta el componente
+    }, []); 
 
     return (
         <div>
