@@ -1,92 +1,102 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import '../Stylesheet/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '../Navigator/Navigator';
 
 export default function MaintenanceSelection() {
+    const [maintenanceDetails, setMaintenanceDetails] = useState([]);
+
+    // Fetch data from the backend
+    useEffect(() => {
+        axios.get('http://localhost:8080/maintenance/administrator')  // Ajusta la URL según la configuración de tu backend
+            .then(response => {
+                setMaintenanceDetails(response.data);  // Actualiza el estado con los datos obtenidos
+            })
+            .catch(error => {
+                console.error("Error fetching maintenance data", error);
+            });
+    }, []);  // El segundo argumento [] asegura que la llamada solo se haga una vez cuando se monta el componente
+
     return (
         <div>
             <header>
                 <h1 className="titulo">Transportes la libertad<span>Agency</span></h1>
             </header>
-            <NavigationBar>
+            <NavigationBar />
 
-            </NavigationBar>
-
-            <div class="container d-flex justify-content-center align-items-center">
-                <div class="row text-center">
+            <div className="container d-flex justify-content-center align-items-center">
+                <div className="row text-center">
                     <h1>Administrador</h1>
-                    <div class="">
-
                     <div className="row mb-3">
-                    <div className="col-lg-8 ">
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                        <div className="col-lg-8">
+                            <form className="d-flex" role="search">
+                                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                                <button className="btn btn-outline-success" type="submit">Search</button>
+                            </form>
                         </div>
                         <div className="col-lg-2">
-                        <Link className="btn btn-success w-100 mx-2" to="/addRegister">Agregar Nuevo</Link>
+                            <Link className="btn btn-success w-100 mx-2" to="/addRegister">Agregar Nuevo</Link>
                         </div>
-                        
                         <div className="col-lg-2">
-                            
-                        <form id="exportForm" action="ControladorAdministrador" className='w-100' method="POST">
-                            <input type="hidden" name="accion" value="exportarExcel"></input>
-                            <button class="btn btn-danger btn-sm w-100" type="submit">Exportar Excel</button>
-                        </form>
-                    </div>
+                            <form id="exportForm" action="ControladorAdministrador" className='w-100' method="POST">
+                                <input type="hidden" name="accion" value="exportarExcel" />
+                                <button className="btn btn-danger btn-sm w-100" type="submit">Exportar Excel</button>
+                            </form>
                         </div>
-                      
-                       
                     </div>
-                    <table class="table table-striped table-primary" border="1">
+
+                    {/* Tabla para mostrar los datos */}
+                    <table className="table table-striped table-primary" border="1">
                         <thead>
-                            <tr class="cell text-center">
-                                <th class="cell text-center">ID</th>
-                                <th class="cell text-center">Kilometraje</th>
-                                <th class="cell text-center">Placa</th>
-                                <th class="cell text-center">Marca</th>
-                                <th class="cell text-center">Modelo</th>
-                                <th class="cell text-center">Año fabricacion</th>
-                                <th class="cell text-center">Plan de mantenimiento</th>
-                                <th class="cell text-center">Tipo de mantenimiento</th>
-                                <th class="cell text-center">Reporte de falla</th>
-                                <th class="cell text-center">Fecha programada</th>
-                                <th class="cell text-center">Descripcion</th>
-                                <th class="cell text-center">Acciones</th>
+                            <tr className="cell text-center">
+                                <th className="cell text-center">ID</th>
+                                <th className="cell text-center">Placa</th>
+                                <th className="cell text-center">Marca</th>
+                                <th className="cell text-center">Modelo</th>
+                                <th className="cell text-center">Año de Fabricación</th>
+                                <th className="cell text-center">Kilometraje</th>
+                                <th className="cell text-center">Plan de Mantenimiento</th>
+                                <th className="cell text-center">Tipo de Mantenimiento</th>
+                                <th className="cell text-center">Descripción del Reporte</th>
+                                <th className="cell text-center">Fecha de Mantenimiento</th>
+                                <th className="cell text-center">Descripciones</th>
+                                <th className="cell text-center">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody className="table-group-divider">
-                            {[1, 2].map(id => (
-                                <tr key={id}>
-                                    <td className="cell text-center">{id}</td>
-                                    <td className="cell text-center">{id === 1 ? '50000' : '60000'}</td>
-                                    <td className="cell text-center">{id === 1 ? 'ABC123' : 'DEF456'}</td>
-                                    <td className="cell text-center">{id === 1 ? 'Toyota' : 'Honda'}</td>
-                                    <td className="cell text-center">{id === 1 ? 'Corolla' : 'Civic'}</td>
-                                    <td className="cell text-center">{id === 1 ? '2018-01-01' : '2019-02-15'}</td>
-                                    <td className="cell text-center">{id === 1 ? 'Mantenimiento Preventivo' : 'Mantenimiento Correctivo'}</td>
-                                    <td className="cell text-center">{id === 1 ? 'Mantenimiento de Neumáticos' : 'Mantenimiento Mecánico'}</td>
-                                    <td className="cell text-center">{id === 1 ? 'Problema con la presión de los neumáticos.' : 'Desgaste irregular de los neumáticos delanteros.'}</td>
-                                    <td className="cell text-center">{id === 1 ? '2024-06-20' : '2024-06-21'}</td>
-                                    <td className="cell text-center">{id === 1 ? 'Revisión y reemplazo de neumáticos, ajuste de presión y alineación.' : 'Inspección y reparación de componentes del motor y sistemas mecánicos.'}</td>
-                                    <td className="cell text-center">
+                        <tbody>
+                            {maintenanceDetails.length > 0 ? (
+                                maintenanceDetails.map((maintenance, index) => (
+                                    <tr key={index}>
+                                        <td>{maintenance.idMaintenance}</td>
+                                        <td>{maintenance.plate}</td>
+                                        <td>{maintenance.brand}</td>
+                                        <td>{maintenance.model}</td>
+                                        <td>{new Date(maintenance.yearManufacture).toLocaleDateString()}</td>
+                                        <td>{maintenance.mileage}</td>
+                                        <td>{maintenance.maintenancePlan}</td>
+                                        <td>{maintenance.nameType}</td>
+                                        <td>{maintenance.descriptionReport}</td>
+                                        <td>{new Date(maintenance.dateMaintenance).toLocaleDateString()}</td>
+                                        <td>{maintenance.descriptions}</td>
+                                        <td className="cell text-center">
                                         <Link className="btn btn-warning mx-2" to="/editRegister">Editar</Link>
                                         <Link className="btn btn-danger mx-2" >Eliminar</Link>
                                     </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="11">Cargando datos...</td>
                                 </tr>
-                            ))}
+                            )}
                         </tbody>
                     </table>
                 </div>
             </div>
-
-            <footer className="footer">
-                <p>Todos los derechos reservados 2024</p>
-            </footer>
         </div>
     );
 }
+
 
