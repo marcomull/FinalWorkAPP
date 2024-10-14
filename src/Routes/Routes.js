@@ -9,6 +9,7 @@ import AddRequest from "../PagesMechanic/AddRequest";
 import RequestSend from "../PagesStore/RequestSend";
 import Index from "../PageIndex/Index";
 import SpareParts from "../PagesStore/SpareParts";
+import AddRequestStore from "../PagesStore/AddRequestStore";
 
 function RoutesComponent() {
     return (
@@ -23,6 +24,7 @@ function RoutesComponent() {
                 <Route path="/addRequest" element={<AddRequest/>} />
                 <Route path="/logistica" element={<RequestSend/>} />
                 <Route path="/requestSend" element={<SpareParts/>} />
+                <Route path="/addRequestStore" element={<AddRequestStore/>}/>
             </Routes>
         </BrowserRouter>
     );
