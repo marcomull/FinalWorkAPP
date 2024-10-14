@@ -1,57 +1,78 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../Stylesheet/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '../Navigator/Navigator';
+import axios from 'axios';
 
 export default function MaintenanceSelection() {
+    const [maintenanceData, setMaintenanceData] = useState([]);
+
+    // Fetch maintenance data from the backend
+    useEffect(() => {
+        const fetchMaintenanceData = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/maintenance/mechanic');
+                setMaintenanceData(response.data); // Update state with the fetched data
+            } catch (error) {
+                console.error("Error fetching maintenance data", error);
+            }
+        };
+
+        fetchMaintenanceData();
+    }, []);
+
     return (
         <div>
             <header>
                 <h1 className="titulo">Transportes la libertad<span>Agency</span></h1>
             </header>
-            <NavigationBar>
-
-            </NavigationBar>
+            <NavigationBar />
 
             <div className="container d-flex justify-content-center align-items-center">
                 <div className="row text-center">
-                    <h1>Mecanico</h1>
+                    <h1>Mecánico</h1>
                     <div className="d-flex justify-content-between align-items-center mb-2">
                         <form className="d-flex" role="search">
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
+                            <button className="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
                         <a className="btn btn-danger btn-sm" href="">Exportar PDF</a>
                     </div>
                     <table className="table table-striped table-primary">
                         <thead>
-                        <tr className="cell text-center">
-                            <th>ID</th>
-                            <th>Kilometraje</th>
-                            <th>Placa</th>
-                            <th>Marca</th>
-                            <th>Modelo</th>
-                            <th>Año fabricacion</th>
-                            <th>Plan de mantenimiento</th>
-                            <th>Acciones</th>
-                        </tr>
+                            <tr className="cell text-center">
+                                <th>ID</th>
+                                <th>Kilometraje</th>
+                                <th>Placa</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>Año fabricación</th>
+                                <th>Plan de mantenimiento</th>
+                                <th>Acciones</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {[1, 2, 3].map(id => (
-                            <tr key={id}>
-                                <td className="cell text-center">{id}</td>
-                                <td className="cell text-center">{id === 1 ? '120,000' : id === 2 ? '80,000' : '150,000'}</td>
-                                <td className="cell text-center">{id === 1 ? 'ABC123' : id === 2 ? 'DEF456' : 'GHI789'}</td>
-                                <td className="cell text-center">{id === 1 ? 'Toyota' : id === 2 ? 'Honda' : 'Ford'}</td>
-                                <td className="cell text-center">{id === 1 ? 'Corolla' : id === 2 ? 'Civic' : 'Focus'}</td>
-                                <td className="cell text-center">{id === 1 ? '2018' : id === 2 ? '2019' : '2017'}</td>
-                                <td className="cell text-center">{id === 1 ? 'Plan A' : id === 2 ? 'Plan B' : 'Plan C'}</td>
-                                <td className="cell text-center">
-                                    <Link className="btn btn-primary" to="/maintenanceStartRequest">Seleccionar</Link>
-                                </td>
-                            </tr>
-                        ))}
+                            {maintenanceData.length > 0 ? (
+                                maintenanceData.map((maintenance, index) => (
+                                    <tr key={index}>
+                                        <td> {maintenance.idMaintenance}</td>
+                                        <td> {maintenance.mileage}</td>
+                                        <td>{maintenance.plate}</td>
+                                        <td>{maintenance.brand}</td>
+                                        <td>{maintenance.model}</td>
+                                        <td>{new Date(maintenance.yearManufacture).toLocaleDateString()}</td>
+                                        <td>{maintenance.maintenancePlan}</td>
+                                        <td>
+                                            <Link className="btn btn-primary" to="/maintenanceStartRequest">Seleccionar</Link>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="8">Cargando datos...</td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>
@@ -63,4 +84,3 @@ export default function MaintenanceSelection() {
         </div>
     );
 }
-
