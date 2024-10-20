@@ -11,7 +11,7 @@ const NavigationBar = () => {
             <Link className="enlace" to="/mecanico">Mecánico</Link>
             <Link className="enlace" to="/logistica">Logística</Link>
             <Link className="enlace" to="/registrar">Registrar</Link>
-            <Link className="enlace" to="/salir">Salir</Link>
+            <Link className="enlace" to="/exit">Salir</Link>
         </nav>
     );
 };

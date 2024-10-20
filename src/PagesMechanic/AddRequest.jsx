@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../Stylesheet/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '../Navigator/Navigator';
@@ -37,7 +38,7 @@ export default function AddRequest() {
                                 </select>
                             </div>
                             <div className="text-center">
-                                <button className="btn btn-success" type="submit">Solicitar</button>
+                                <Link className="btn btn-success" to="/RequestStart">Solicitar</Link>
                             </div>
                         </form>
                     </div>
