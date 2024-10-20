@@ -1,6 +1,7 @@
 import React from 'react';
 import '../Stylesheet/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 import NavigationBar from '../Navigator/Navigator';
 
 export default function Index() {
@@ -36,7 +37,7 @@ export default function Index() {
                         </svg>
                         <p className="ubi">Arequipa, Perú</p>
                     </div>
-                    <a href="ControladorLogin?accion=IngresarLogin" className="boton">Registrarse</a>
+                    <Link className="boton" to="/IndexRegister">Registrarse</Link>
                 </div>
             </section>
 

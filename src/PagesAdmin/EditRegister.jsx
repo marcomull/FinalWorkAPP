@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../Stylesheet/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '../Navigator/Navigator';
@@ -30,7 +31,7 @@ export default function EditRegister() {
                         <input className="form-control" type="date" name="txtañoFabricacion"/><br />
                         PLAN DE MANTENIMIENTO: <br />
                         <input className="form-control" type="text" name="txtplanMantenimiento"/><br />
-                        <input className="btn btn-success form-control" type="submit" value="Editar Vehículo" /><br />
+                        <Link className="btn btn-success form-control" to="/EditSelection" name="accion">Editar mantenimiento</Link><br />
                     </form>
                 </div>
             </div>

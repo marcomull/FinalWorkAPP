@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Stylesheet/style.css';
 import NavigationBar from '../Navigator/Navigator';
@@ -29,7 +30,7 @@ export default function AddRequestStore() {
                             <label htmlFor="repuesto" className="form-label">Repuesto:</label>
                             <input id="repuesto" className="form-control" type="text" name="repuesto" />
                         </div>
-                        <button className="btn btn-success" type="submit">Agregar Solicitud</button>
+                        <Link className="btn btn-success" to="/addStore">Agregar Solicitud</Link>
                     </form>
                 </div>
             </div>
