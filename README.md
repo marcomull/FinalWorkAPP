@@ -7,5 +7,5 @@ Gomes Reyes Christopher Enrique   ChristopherGR03
 Bustinza Sucre Julio              Julio-BS
 
 
-uso de Node, React y se uso boostrap npm install bootstrap
+Uso de Node, React, axios y se uso boostrap npm install bootstrap
 
