@@ -28,7 +28,7 @@ export default function Login() {
                         <input className="form-control" type="text" name="txtCorreoLogin" /><br />
                         Contraseña: <br />
                         <input className="form-control" type="password" name="txtPasswordLogin" /><br />
-                        <input className="btn btn-success form-control" type="submit" name="accion" value="IngresarUsuario" /><br />
+                        <Link className="btn btn-success form-control" to="" type="submit">Ingresar usuario</Link>
                         <br />
                         <Link className="btn btn-success form-control" to="/register" type="submit">Registrar</Link><br />
                     </form>

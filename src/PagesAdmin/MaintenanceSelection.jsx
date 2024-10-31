@@ -81,7 +81,7 @@ export default function MaintenanceSelection() {
                                         <td>{maintenance.descriptions}</td>
                                         <td className="cell text-center">
                                         <Link className="btn btn-warning mx-2" to="/editRegister">Editar</Link>
-                                        <Link className="btn btn-danger mx-2" >Eliminar</Link>
+                                        <Link className="btn btn-danger mx-2" to="/deleteRegister">Eliminar</Link>
                                     </td>
                                     </tr>
                                 ))
