@@ -36,7 +36,7 @@ export default function MaintenanceSelection() {
                             </form>
                         </div>
                         <div className="col-lg-2">
-                            <Link className="btn btn-success w-100 mx-2" to="/addRegister">Agregar Nuevo</Link>
+                            <Link className="btn btn-success w-100 mx-2" to="/addNew">Agregar Nuevo</Link>
                         </div>
                         <div className="col-lg-2">
                             <form id="exportForm" action="ControladorAdministrador" className='w-100' method="POST">
