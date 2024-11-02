@@ -18,6 +18,20 @@ export default function MaintenanceSelection() {
             });
     }, []);
 
+    function handleDelete(id) {
+        if (window.confirm('¿Estás seguro de que deseas eliminar este mantenimiento?')) {
+            axios.delete(`http://localhost:8080/maintenance/delete/${id}`)
+                .then(response => {
+                    alert('Mantenimiento eliminado exitosamente');
+                    setMaintenanceDetails(maintenanceDetails.filter(item => item.idMaintenance !== id));
+                })
+                .catch(error => {
+                    console.error('Error al eliminar el mantenimiento', error);
+                    alert('Error al eliminar el mantenimiento');
+                });
+        }
+    }
+
     return (
         <div>
             <header>
@@ -80,10 +94,8 @@ export default function MaintenanceSelection() {
                                         <td>{new Date(maintenance.dateMaintenance).toLocaleDateString()}</td>
                                         <td>{maintenance.descriptions}</td>
                                         <td className="cell text-center">
-                                            <Link className="btn btn-warning mx-2" to={`/editRegister/${maintenance.idMaintenance}`}>
-                                                Editar
-                                            </Link>                                            
-                                            <Link className="btn btn-danger mx-2" >Eliminar</Link>
+                                            <Link className="btn btn-warning mx-2" to={`/editRegister/${maintenance.idMaintenance}`}>Editar</Link>                                            
+                                            <Link to="#" className="btn btn-danger btn-sm mx-1" onClick={(e) => { e.preventDefault(); handleDelete(maintenance.idMaintenance); }}>  Eliminar </Link>
                                         </td>
                                     </tr>
                                 ))
