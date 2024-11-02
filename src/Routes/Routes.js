@@ -19,7 +19,7 @@ function RoutesComponent() {
             <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/admin" element={<MaintenanceSelection />} />
-                <Route path="/editRegister" element={<EditRegister />} />
+                <Route path="/editRegister/:id" element={<EditRegister />} />
                 <Route path="/addNew" element={<AddRegister />} />
                 <Route path="/mecanico" element={<MaintenanceSelectionMechanic />} />
                 <Route path="/maintenanceStartRequest" element={<MaintenanceStartRequest/>} />
