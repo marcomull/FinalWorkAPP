@@ -9,14 +9,14 @@ export default function MaintenanceSelection() {
     const [maintenanceDetails, setMaintenanceDetails] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/maintenance/administrator')  
+        axios.get('http://localhost:8080/maintenance/administrator')
             .then(response => {
-                setMaintenanceDetails(response.data); 
+                setMaintenanceDetails(response.data);
             })
             .catch(error => {
                 console.error("Error fetching maintenance data", error);
             });
-    }, []); 
+    }, []);
 
     return (
         <div>
@@ -80,9 +80,11 @@ export default function MaintenanceSelection() {
                                         <td>{new Date(maintenance.dateMaintenance).toLocaleDateString()}</td>
                                         <td>{maintenance.descriptions}</td>
                                         <td className="cell text-center">
-                                        <Link className="btn btn-warning mx-2" to="/editRegister">Editar</Link>
-                                        <Link className="btn btn-danger mx-2" to="/deleteRegister">Eliminar</Link>
-                                    </td>
+                                            <Link className="btn btn-warning mx-2" to={`/editRegister/${maintenance.idMaintenance}`}>
+                                                Editar
+                                            </Link>                                            
+                                            <Link className="btn btn-danger mx-2" >Eliminar</Link>
+                                        </td>
                                     </tr>
                                 ))
                             ) : (
