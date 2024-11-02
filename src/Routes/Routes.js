@@ -13,11 +13,13 @@ import Login from "../PagesLogin/Login"
 import Register from "../PagesLogin/Register"
 import Index from "../PageIndex/Index";
 
+
 function RoutesComponent() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/IndexRegister" element={<Login />} />
                 <Route path="/admin" element={<MaintenanceSelection />} />
                 <Route path="/editRegister/:id" element={<EditRegister />} />
                 <Route path="/addNew" element={<AddRegister />} />
@@ -29,6 +31,13 @@ function RoutesComponent() {
                 <Route path="/addRequestStore" element={<AddRequestStore/>}/>
                 <Route path="/register" element={<Register/>} />
                 <Route path="/registrar" element={<Login/>} />
+                <Route path="/MaintenanceSelection" element={<MaintenanceSelection/>}/>
+                <Route path="/EditSelection" element={<MaintenanceSelection/>}/>
+                <Route path="/deleteRegister" element={<MaintenanceSelection/>}/>
+                <Route path="/RequestStart" element={<MaintenanceStartRequest/>}/>
+                <Route path="/enviarRepuesto" element={<RequestSend/>}/>
+                <Route path="/addStore" element={<RequestSend/>}/>
+                <Route path="/exit" element={<Index/>}/>
             </Routes>
         </BrowserRouter>
     );
