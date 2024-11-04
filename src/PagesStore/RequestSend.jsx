@@ -59,7 +59,7 @@ export default function RequestSend() {
                                 requestData.map((request, index) => (
                                     <tr key={index}>
                                         <td className="cell text-center">{request.idSparePart}</td>
-                                        <td className="cell text-center">{request.startMaintenance}</td>
+                                        <td className="cell text-center">{new Date (request.startMaintenance).toLocaleDateString()}</td>
                                         <td className="cell text-center">{request.sparePart}</td>
                                         <td className="cell text-center">{request.mechanic}</td>
                                         <td className="cell text-center">
