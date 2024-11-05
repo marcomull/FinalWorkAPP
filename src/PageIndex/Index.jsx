@@ -2,7 +2,6 @@ import React from 'react';
 import '../Stylesheet/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import NavigationBar from '../Navigator/Navigator';
 
 export default function Index() {
     return (
@@ -10,7 +9,10 @@ export default function Index() {
             <header>
                 <h1 className="titulo">Transportes la Libertad <span>Agency</span></h1>
             </header>
-            <NavigationBar />
+            <nav className="nav-principal align-items-center" style={{ backgroundColor: '#b9fdfd' }}>
+                <Link className="enlace" to="/">Inicio</Link>
+                <Link className="enlace" to="/registrar">Registrar</Link>
+            </nav>
 
             <section className="hero">
                 <div className="contenido-hero">

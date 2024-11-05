@@ -60,7 +60,6 @@ export default function MaintenanceSelection() {
                         </div>
                     </div>
 
-                    {/* Tabla para mostrar los datos */}
                     <table className="table table-striped table-primary" border="1">
                         <thead>
                             <tr className="cell text-center">
@@ -95,7 +94,7 @@ export default function MaintenanceSelection() {
                                         <td>{maintenance.descriptions}</td>
                                         <td className="cell text-center">
                                             <Link className="btn btn-warning mx-2" to={`/editRegister/${maintenance.idMaintenance}`}>Editar</Link>                                            
-                                            <Link to="#" className="btn btn-danger btn-sm mx-1" onClick={(e) => { e.preventDefault(); handleDelete(maintenance.idMaintenance); }}>  Eliminar </Link>
+                                            <Link className="btn btn-danger btn-sm mx-1" onClick={(e) => { e.preventDefault(); handleDelete(maintenance.idMaintenance); }}>  Eliminar </Link>
                                         </td>
                                     </tr>
                                 ))

@@ -436,3 +436,36 @@ main
 .buttons {
     margin-bottom: 20px; /* Ajusta el valor según sea necesario */
 }
+
+/*menu Usuario*/
+.nav-wrapper {
+    position: relative;
+}
+
+.user-menu-container {
+    position: relative;
+}
+
+.user-menu-button {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.user-menu-button:hover {
+    opacity: 0.8;
+}
+
+.dropdown-item {
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-item.text-danger:hover {
+    background-color: #fff5f5;
+}

@@ -11,9 +11,10 @@ export default function Register() {
             <header>
                 <h1 className="titulo">Transportes la libertad<span>Agency</span></h1>
             </header>
-            <NavigationBar>
-
-            </NavigationBar>
+            <nav className="nav-principal align-items-center" style={{ backgroundColor: '#b9fdfd' }}>
+                <Link className="enlace" to="/">Inicio</Link>
+                <Link className="enlace" to="/registrar">Registrar</Link>
+            </nav>
 
             <div className="container">
                 <div className="col-lg-12">
