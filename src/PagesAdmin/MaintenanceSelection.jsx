@@ -9,8 +9,8 @@ export default function MaintenanceSelection() {
     const [maintenanceDetails, setMaintenanceDetails] = useState([]);
     const [searchType, setSearchType] = useState("maintenanceId"); // Valor inicial del tipo de búsqueda
     const [searchValue, setSearchValue] = useState(""); // Valor de la búsqueda
-    const handleListAll = () => {fetchMaintenanceDetails();}; // Recargar todos los mantenimientos
-    
+    const handleListAll = () => { fetchMaintenanceDetails(); }; // Recargar todos los mantenimientos
+
     useEffect(() => {
         fetchMaintenanceDetails();
     }, []);
@@ -48,7 +48,7 @@ export default function MaintenanceSelection() {
             const response = await axios.get(`http://localhost:8080/maintenance/search`, {
                 params: { type: searchType, value: searchValue }
             });
-    
+
             // Verifica si la respuesta contiene datos
             if (response.data.length === 0) {
                 alert('No se encontraron resultados para la búsqueda');
@@ -63,7 +63,7 @@ export default function MaintenanceSelection() {
             fetchMaintenanceDetails();
         }
     };
-    
+
 
     return (
         <div>
@@ -76,7 +76,7 @@ export default function MaintenanceSelection() {
                 <div className="row text-center">
                     <h1>Administrador</h1>
                     <div className="row mb-3">
-                        
+
                         <div className="col-lg-8">
                             <form className="d-flex" role="search" onSubmit={handleSearch}>
                                 <input
@@ -87,8 +87,8 @@ export default function MaintenanceSelection() {
                                     value={searchValue}
                                     onChange={(e) => setSearchValue(e.target.value)}
                                 />
-                                <button className="btn w-50 btn-outline-success me-2" type="submit">Buscar</button>
-                                <button className="btn w-50 btn-outline-success me-2" onClick={handleListAll}>Listar</button>
+                                <button className="btn btn-outline-success w-50 me-2" type="submit">Buscar</button>
+                                <button className="btn btn-outline-success w-50 me-2" onClick={handleListAll}>Listar</button>
                                 <select
                                     className="form-select me-2"
                                     aria-label="Seleccionar tipo de búsqueda"
@@ -108,10 +108,7 @@ export default function MaintenanceSelection() {
                             <Link className="btn btn-success w-100 mx-2" to="/addNew">Agregar Nuevo</Link>
                         </div>
                         <div className="col-lg-2">
-                            <form id="exportForm" action="ControladorAdministrador" className='w-100' method="POST">
-                                <input type="hidden" name="accion" value="exportarExcel" />
-                                <button className="btn btn-danger btn-sm w-100" type="submit">Exportar Excel</button>
-                            </form>
+                            <button className="btn btn-danger w-100 mx-2" type="submit">Exportar Excel</button>
                         </div>
                     </div>
 

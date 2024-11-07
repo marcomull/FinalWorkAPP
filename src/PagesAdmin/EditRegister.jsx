@@ -15,6 +15,8 @@ export default function EditRegister() {
         dateMaintenance: '',
         descriptions: '',
     });
+    const [vehicles, setVehicles] = useState([]); // Estado para almacenar la lista de vehículos
+    const [typeMaintenance, setTypeMaintenance] = useState([]); // Estado para almacenar la lista de vehículos
 
     useEffect(() => {
         axios.get(`http://localhost:8080/maintenance/${id}`)
@@ -23,6 +25,22 @@ export default function EditRegister() {
             })
             .catch(error => {
                 console.error("Error al cargar los datos de mantenimiento", error);
+            });
+        // Obtener la lista de vehículos
+        axios.get('http://localhost:8080/vehicle/listVehicles')
+            .then(response => {
+                setVehicles(response.data);
+            })
+            .catch(error => {
+                console.error("Error al cargar la lista de vehículos", error);
+            });
+        // Obtener la lista de typeMaintenance
+        axios.get('http://localhost:8080/typeMaintenance/listMaintenance')
+            .then(response => {
+                setTypeMaintenance(response.data);
+            })
+            .catch(error => {
+                console.error("Error al cargar la lista de tipos de mantenimientos", error);
             });
     }, [id]);
 
@@ -57,16 +75,47 @@ export default function EditRegister() {
                     <form onSubmit={handleUpdate}>
                         <div className="mb-3">
                             <label htmlFor="vehicleId" className="form-label">Vehículo</label>
-                            <input type="text" className="form-control" id="vehicleId" name="vehicleId" value={maintenanceData.vehicleId} onChange={handleChange} required />
+                            <select
+                                className="form-select"
+                                id="vehicleId"
+                                name="vehicleId"
+                                value={maintenanceData.vehicleId}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="">Selecciona un vehículo</option>
+                                {vehicles.map((vehicle) => (
+                                    <option key={vehicle.idVehicle} value={vehicle.idVehicle}>
+                                        {vehicle.brand} - {vehicle.model} - {vehicle.plate}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
+
                         <div className="mb-3">
                             <label htmlFor="administratorId" className="form-label">Administrador</label>
                             <input type="text" className="form-control" id="administratorId" name="administratorId" value={maintenanceData.administratorId} onChange={handleChange} required />
                         </div>
+
                         <div className="mb-3">
-                            <label htmlFor="typeMaintenanceId" className="form-label">Tipo de Mantenimiento</label>
-                            <input type="text" className="form-control" id="typeMaintenanceId" name="typeMaintenanceId" value={maintenanceData.typeMaintenanceId} onChange={handleChange} required />
+                            <label htmlFor="typeMaintenanceId" className="form-label">Vehículo</label>
+                            <select
+                                className="form-select"
+                                id="typeMaintenanceId"
+                                name="typeMaintenanceId"
+                                value={maintenanceData.typeMaintenanceId}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="">Selecciona un vehículo</option>
+                                {typeMaintenance.map((typeMaintenance) => (
+                                    <option key={typeMaintenance.typeMaintenanceId} value={typeMaintenance.typeMaintenanceId}>
+                                        {typeMaintenance.nameType} - {typeMaintenance.description}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
+
                         <div className="mb-3">
                             <label htmlFor="failureReportId" className="form-label">Reporte de Fallo</label>
                             <input type="text" className="form-control" id="failureReportId" name="failureReportId" value={maintenanceData.failureReportId} onChange={handleChange} required />
@@ -76,8 +125,19 @@ export default function EditRegister() {
                             <input type="date" className="form-control" id="dateMaintenance" name="dateMaintenance" value={maintenanceData.dateMaintenance} onChange={handleChange} required />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="descriptions" className="form-label">Descripción</label>
-                            <textarea className="form-control" id="descriptions" name="descriptions" value={maintenanceData.descriptions} onChange={handleChange} required />
+                            <label htmlFor="descriptions" className="form-label">Estado</label>
+                            <select
+                                className="form-select"
+                                id="descriptions"
+                                name="descriptions"
+                                value={maintenanceData.descriptions}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="">Selecciona el estado</option>
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                            </select>
                         </div>
                         <button type="submit" className="btn btn-success form-control">Actualizar</button>
                     </form>
