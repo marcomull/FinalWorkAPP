@@ -18,6 +18,7 @@ export default function EditRegister() {
     const [vehicles, setVehicles] = useState([]); // Estado para almacenar la lista de vehículos
     const [typeMaintenance, setTypeMaintenance] = useState([]); // Estado para almacenar la lista de vehículos
     const [failureReport, setFailureReport] = useState([]); // Estado para almacenar la lista de failureReports
+    const [administrator, setAdministrator] = useState([]); // Estado para almacenar la lista de administrator
 
     useEffect(() => {
         axios.get(`http://localhost:8080/maintenance/${id}`)
@@ -64,6 +65,15 @@ export default function EditRegister() {
             .catch(error => {
                 console.error("Error al cargar la lista de reportes", error);
             });
+
+        // Obtener la lista de administrador
+        axios.get('http://localhost:8080/administrator/listAdministrator')
+            .then(response => {
+                setAdministrator(response.data);
+            })
+            .catch(error => {
+                console.error("Error al cargar la lista de administrador", error);
+            });
     }, [id]);
 
     const handleUpdate = (event) => {
@@ -104,7 +114,7 @@ export default function EditRegister() {
                                 className="form-select"
                                 id="vehicleId"
                                 name="vehicleId"
-                                value={maintenanceData.vehicleId || ""} 
+                                value={maintenanceData.vehicleId || ""}
                                 onChange={handleChange}
                                 required
                             >
@@ -120,7 +130,21 @@ export default function EditRegister() {
                         {/* Administrador */}
                         <div className="mb-3">
                             <label htmlFor="administratorId" className="form-label">Administrador</label>
-                            <input type="text" className="form-control" id="administratorId" name="administratorId" value={maintenanceData.administratorId} onChange={handleChange} required />
+                            <select
+                                className="form-select"
+                                id="administratorId"
+                                name="administratorId"
+                                value={maintenanceData.administratorId || ""}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="">Selecciona un tipo de mantenimiento</option>
+                                {administrator.map((administrator) => (
+                                    <option key={administrator.id} value={administrator.id}>
+                                        {administrator.id} - {administrator.email}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
 
                         {/* Tipo de mantenimiento */}
