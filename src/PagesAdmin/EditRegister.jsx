@@ -17,15 +17,27 @@ export default function EditRegister() {
     });
     const [vehicles, setVehicles] = useState([]); // Estado para almacenar la lista de vehículos
     const [typeMaintenance, setTypeMaintenance] = useState([]); // Estado para almacenar la lista de vehículos
+    const [failureReport, setFailureReport] = useState([]); // Estado para almacenar la lista de failureReports
 
     useEffect(() => {
         axios.get(`http://localhost:8080/maintenance/${id}`)
             .then(response => {
-                setMaintenanceData(response.data); // Carga los datos en el formulario
+                const data = response.data;
+                setMaintenanceData({
+                    vehicleId: data.vehicleId || '',
+                    administratorId: data.administratorId || '',
+                    typeMaintenanceId: data.typeMaintenanceId || '',
+                    failureReportId: data.failureReportId || '',
+                    dateMaintenance: data.dateMaintenance || '',
+                    descriptions: data.descriptions || '',
+                });
+                console.log("Datos de mantenimiento actualizados:", data);
             })
             .catch(error => {
                 console.error("Error al cargar los datos de mantenimiento", error);
+                alert("Error al cargar los datos de mantenimiento");
             });
+
         // Obtener la lista de vehículos
         axios.get('http://localhost:8080/vehicle/listVehicles')
             .then(response => {
@@ -34,18 +46,30 @@ export default function EditRegister() {
             .catch(error => {
                 console.error("Error al cargar la lista de vehículos", error);
             });
-        // Obtener la lista de typeMaintenance
+
+        // Obtener la lista de tipo de mantenimiento
         axios.get('http://localhost:8080/typeMaintenance/listMaintenance')
             .then(response => {
                 setTypeMaintenance(response.data);
             })
             .catch(error => {
-                console.error("Error al cargar la lista de tipos de mantenimientos", error);
+                console.error("Error al cargar la lista de tipos de mantenimiento", error);
+            });
+
+        // Obtener la lista de reportes de fallos
+        axios.get('http://localhost:8080/failureReport/listFailureReport')
+            .then(response => {
+                setFailureReport(response.data);
+            })
+            .catch(error => {
+                console.error("Error al cargar la lista de reportes", error);
             });
     }, [id]);
 
     const handleUpdate = (event) => {
-        event.preventDefault(); // Evita el comportamiento predeterminado de enviar el formulario
+        event.preventDefault();
+        console.log(maintenanceData); // Verifica los datos antes de enviarlos
+
         axios.put(`http://localhost:8080/maintenance/update/${id}`, maintenanceData)
             .then(response => {
                 console.log("Actualización exitosa", response.data);
@@ -73,64 +97,94 @@ export default function EditRegister() {
                 <div className="col-lg-12">
                     <h1>Editar Registro de Mantenimiento</h1>
                     <form onSubmit={handleUpdate}>
+                        {/* Vehículo */}
                         <div className="mb-3">
                             <label htmlFor="vehicleId" className="form-label">Vehículo</label>
                             <select
                                 className="form-select"
                                 id="vehicleId"
                                 name="vehicleId"
-                                value={maintenanceData.vehicleId}
+                                value={maintenanceData.vehicleId || ""} 
                                 onChange={handleChange}
                                 required
                             >
                                 <option value="">Selecciona un vehículo</option>
                                 {vehicles.map((vehicle) => (
                                     <option key={vehicle.idVehicle} value={vehicle.idVehicle}>
-                                        {vehicle.brand} - {vehicle.model} - {vehicle.plate}
+                                        {vehicle.idVehicle} - {vehicle.brand} - {vehicle.model} - {vehicle.plate}
                                     </option>
                                 ))}
                             </select>
                         </div>
 
+                        {/* Administrador */}
                         <div className="mb-3">
                             <label htmlFor="administratorId" className="form-label">Administrador</label>
                             <input type="text" className="form-control" id="administratorId" name="administratorId" value={maintenanceData.administratorId} onChange={handleChange} required />
                         </div>
 
+                        {/* Tipo de mantenimiento */}
                         <div className="mb-3">
-                            <label htmlFor="typeMaintenanceId" className="form-label">Vehículo</label>
+                            <label htmlFor="typeMaintenanceId" className="form-label">Tipo de mantenimiento</label>
                             <select
                                 className="form-select"
                                 id="typeMaintenanceId"
                                 name="typeMaintenanceId"
-                                value={maintenanceData.typeMaintenanceId}
+                                value={maintenanceData.typeMaintenanceId || ""}
                                 onChange={handleChange}
                                 required
                             >
-                                <option value="">Selecciona un vehículo</option>
-                                {typeMaintenance.map((typeMaintenance) => (
-                                    <option key={typeMaintenance.typeMaintenanceId} value={typeMaintenance.typeMaintenanceId}>
-                                        {typeMaintenance.nameType} - {typeMaintenance.description}
+                                <option value="">Selecciona un tipo de mantenimiento</option>
+                                {typeMaintenance.map((type) => (
+                                    <option key={type.idTypeMaintenance} value={type.idTypeMaintenance}>
+                                        {type.nameType} - {type.description}
                                     </option>
                                 ))}
                             </select>
                         </div>
 
+                        {/* Reporte de fallo */}
                         <div className="mb-3">
                             <label htmlFor="failureReportId" className="form-label">Reporte de Fallo</label>
-                            <input type="text" className="form-control" id="failureReportId" name="failureReportId" value={maintenanceData.failureReportId} onChange={handleChange} required />
+                            <select
+                                className="form-select"
+                                id="failureReportId"
+                                name="failureReportId"
+                                value={maintenanceData.failureReportId || ""}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="">Selecciona un reporte</option>
+                                {failureReport.map((report) => (
+                                    <option key={report.idFailureReport} value={report.idFailureReport}>
+                                        {report.descriptionReport}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
+
+                        {/* Fecha de mantenimiento */}
                         <div className="mb-3">
                             <label htmlFor="dateMaintenance" className="form-label">Fecha de Mantenimiento</label>
-                            <input type="date" className="form-control" id="dateMaintenance" name="dateMaintenance" value={maintenanceData.dateMaintenance} onChange={handleChange} required />
+                            <input
+                                type="date"
+                                className="form-control"
+                                id="dateMaintenance"
+                                name="dateMaintenance"
+                                value={maintenanceData.dateMaintenance ? new Date(maintenanceData.dateMaintenance).toISOString().split('T')[0] : ""}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
+
+                        {/* Estado */}
                         <div className="mb-3">
                             <label htmlFor="descriptions" className="form-label">Estado</label>
                             <select
                                 className="form-select"
                                 id="descriptions"
                                 name="descriptions"
-                                value={maintenanceData.descriptions}
+                                value={maintenanceData.descriptions || ""}
                                 onChange={handleChange}
                                 required
                             >
@@ -139,6 +193,7 @@ export default function EditRegister() {
                                 <option value="Inactivo">Inactivo</option>
                             </select>
                         </div>
+
                         <button type="submit" className="btn btn-success form-control">Actualizar</button>
                     </form>
                 </div>
