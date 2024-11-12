@@ -25,7 +25,7 @@ const Login = () => {
             setError('');
 
             // Establece el usuario en el contexto
-            setUser({ email, rol: role });
+            setUser({ id: response.data.id, email, rol: role });
 
             if (role === 'Administrador') {
                 navigate('/MaintenanceSelection');
