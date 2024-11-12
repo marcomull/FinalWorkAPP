@@ -22,6 +22,24 @@ export default function MaintenanceStartRequest() {
         fetchMaintenanceData();
     }, []);
 
+    // Function to finalize maintenance
+    const finalizeMaintenance = async (id) => {
+        try {
+            const response = await axios.put(`http://localhost:8080/maintenance/finalize/${id}`);
+            console.log('Maintenance finalized:', response.data);
+            // Optionally update state to reflect the change
+            setMaintenanceData((prevData) =>
+                prevData.map((maintenance) =>
+                    maintenance.idJob === id
+                        ? { ...maintenance, descriptions: 'inactivo' }
+                        : maintenance
+                )
+            );
+        } catch (error) {
+            console.error("Error finalizing maintenance", error);
+        }
+    };
+
     return (
         <div>
             <header>
@@ -58,7 +76,7 @@ export default function MaintenanceStartRequest() {
                                             <td>{maintenance.sparePart}</td>
                                             <td>{new Date(maintenance.endMaintenance).toLocaleDateString()}</td>
                                             <td>
-                                                <Link className="btn btn-success" to="">Finalizar</Link>
+                                                <Link className="btn btn-success" to="" onClick={() => finalizeMaintenance(maintenance.idJob)}>Finalizar</Link>
                                                 <Link className="btn btn-success" to="/addRequest">Solicitar</Link>
                                             </td>
                                         </tr>
