@@ -7,12 +7,13 @@ import axios from 'axios';
 
 export default function MaintenanceStartRequest() {
     const [maintenanceData, setMaintenanceData] = useState([]);
-
+    
     // Fetch maintenance data from the backend
     useEffect(() => {
         const fetchMaintenanceData = async () => {
             try {
                 const response = await axios.get('http://localhost:8080/maintenance/jobMechanic');
+                console.log(response.data); // Agrega este log para verificar los datos
                 setMaintenanceData(response.data); // Update state with the fetched data
             } catch (error) {
                 console.error("Error fetching maintenance data", error);
@@ -30,8 +31,8 @@ export default function MaintenanceStartRequest() {
             // Optionally update state to reflect the change
             setMaintenanceData((prevData) =>
                 prevData.map((maintenance) =>
-                    maintenance.idJob === id
-                        ? { ...maintenance, descriptions: 'inactivo' }
+                    maintenance.idMaintenance === id
+                        ? { ...maintenance, descriptions: 'Inactivo' }
                         : maintenance
                 )
             );
@@ -76,7 +77,7 @@ export default function MaintenanceStartRequest() {
                                             <td>{maintenance.sparePart}</td>
                                             <td>{new Date(maintenance.endMaintenance).toLocaleDateString()}</td>
                                             <td>
-                                                <Link className="btn btn-success" to="" onClick={() => finalizeMaintenance(maintenance.idJob)}>Finalizar</Link>
+                                                <Link className="btn btn-success" to="" onClick={() => finalizeMaintenance(maintenance.idMaintenance)}>Finalizar</Link>
                                                 <Link className="btn btn-success" to="/addRequest">Solicitar</Link>
                                             </td>
                                         </tr>
