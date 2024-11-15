@@ -12,6 +12,7 @@ import AddRequestStore from "../PagesStore/AddRequestStore";
 import Login from "../PagesLogin/Login"
 import Register from "../PagesLogin/Register"
 import Index from "../PageIndex/Index";
+import AddJob from "../PagesMechanic/AddJob";
 
 
 function RoutesComponent() {
@@ -24,7 +25,8 @@ function RoutesComponent() {
                 <Route path="/editRegister/:id" element={<EditRegister />} />
                 <Route path="/addNew" element={<AddRegister />} />
                 <Route path="/mecanico" element={<MaintenanceSelectionMechanic />} />
-                <Route path="/maintenanceStartRequest" element={<MaintenanceStartRequest/>} />
+                <Route path="/maintenanceJob" element={<MaintenanceStartRequest/>}/>
+                <Route path="/maintenanceStartRequest" element={<AddJob/>} />
                 <Route path="/addRequest" element={<AddRequest/>} />
                 <Route path="/logistica" element={<RequestSend/>} />
                 <Route path="/requestSend" element={<SpareParts/>} />

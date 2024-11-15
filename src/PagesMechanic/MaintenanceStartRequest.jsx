@@ -65,6 +65,7 @@ export default function MaintenanceStartRequest() {
                                     <th>Inicio de reparación</th>
                                     <th>Repuestos</th>
                                     <th>Fin de reparación</th>
+                                    <th>Descripcion</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
@@ -76,6 +77,7 @@ export default function MaintenanceStartRequest() {
                                             <td>{new Date(maintenance.startMaintenance).toLocaleDateString()}</td>
                                             <td>{maintenance.sparePart}</td>
                                             <td>{new Date(maintenance.endMaintenance).toLocaleDateString()}</td>
+                                            <td>{maintenance.description}</td>
                                             <td>
                                                 <Link className="btn btn-success" to="" onClick={() => finalizeMaintenance(maintenance.idMaintenance)}>Finalizar</Link>
                                                 <Link className="btn btn-success" to="/addRequest">Solicitar</Link>

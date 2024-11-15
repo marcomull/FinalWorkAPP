@@ -37,6 +37,7 @@ export default function MaintenanceSelection() {
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                             <button className="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
+                        <Link className="btn btn-primary" to="/maintenanceJob">Mis trabajos</Link>
                         <a className="btn btn-danger btn-sm" href="">Exportar PDF</a>
                     </div>
                     <table className="table table-striped table-primary">
