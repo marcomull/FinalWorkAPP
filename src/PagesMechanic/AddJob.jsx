@@ -15,20 +15,18 @@ export default function AddJob() {
     const getTodayDate = () => {
         const today = new Date();
         const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, '0'); // Asegura formato 2 dígitos
-        const day = String(today.getDate()).padStart(2, '0'); // Asegura formato 2 dígitos
-        return `${year}-${month}-${day}`;
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // Mes con 2 dígitos
+        const day = String(today.getDate()).padStart(2, '0'); // Día con 2 dígitos
+        return `${year}-${month}-${day}`; // Formato YYYY-MM-DD
     };
-
+    
     const [formData, setFormData] = useState({
         idMaintenance: '',
         startMaintenance: getTodayDate(),
         //endMaintenance: '',
-        idSparePart: '',
         idMechanic: user?.id || '' // Inicializar con el id del mecánico
     });
     const [maintenance, setMaintenance] = useState([]); // Estado para almacenar la lista de mantenimiento
-    const [sparepart, setSparePart] = useState([]); // Estado para almacenar la lista de repuestos
 
     const handleChange = (e) => {
         setFormData({
@@ -46,15 +44,6 @@ export default function AddJob() {
             .catch(error => {
                 console.error("Error al cargar la lista de mantenimiento", error);
             });
-
-        // Obtener la lista de repuestos
-        axios.get('http://localhost:8080/sparePart/list')
-            .then(response => {
-                setSparePart(response.data);
-            })
-            .catch(error => {
-                console.error("Error al cargar la lista de repuestos", error);
-            });
     }, [id]);
 
 
@@ -66,7 +55,7 @@ export default function AddJob() {
 
             .then(response => {
                 console.log('Trabajo agregado exitosamente:', response.data);
-                
+
             })
             .catch(error => {
                 console.error("Error al agregar el trabajo de mantenimiento", error);
@@ -93,8 +82,8 @@ export default function AddJob() {
                                 className="form-control"
                                 id="mechanic"
                                 name="mechanic"
-                                value={`${user?.id} - ${user?.email}`} 
-                                readOnly 
+                                value={`${user?.id} - ${user?.email}`}
+                                readOnly
                             />
                         </div>
                         <div className="mb-3">
@@ -111,24 +100,6 @@ export default function AddJob() {
                                 {maintenance.map((maintenance) => (
                                     <option key={maintenance.idMaintenance} value={maintenance.idMaintenance}>
                                         {maintenance.idMaintenance} - {maintenance.model} - {maintenance.plate} - {maintenance.maintenancePlan}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="idSparePart" className="form-label">Repuestos</label>
-                            <select
-                                className="form-select"
-                                id="idSparePart"
-                                name="idSparePart"
-                                value={formData.idSparePart || ""}
-                                onChange={handleChange}
-                                required
-                            >
-                                <option value="">Selecciona un repuesto</option>
-                                {sparepart.map((sparepart) => (
-                                    <option key={sparepart.idSparePart} value={sparepart.idSparePart}>
-                                        {sparepart.idSparePart} - {sparepart.sparePart}
                                     </option>
                                 ))}
                             </select>
