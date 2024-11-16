@@ -12,7 +12,7 @@ export default function RequestSend() {
     useEffect(() => {
         const fetchRequestData = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/maintenance/jobLogistic');
+                const response = await axios.get('http://localhost:8080/sparePart/listsparePart');
                 setRequestData(response.data); // Update state with the fetched data
             } catch (error) {
                 console.error("Error fetching request data", error);
@@ -48,7 +48,7 @@ export default function RequestSend() {
                         <thead>
                             <tr className="cell text-center">
                                 <th>ID</th>
-                                <th>Fecha</th>
+                                <th>Fecha solicitud</th>
                                 <th>Repuesto</th>
                                 <th>Mecánico</th>
                                 <th>Acciones</th>
@@ -56,10 +56,10 @@ export default function RequestSend() {
                         </thead>
                         <tbody>
                             {requestData.length > 0 ? (
-                                requestData.map((request, index) => (
+                                requestData.map((request, index) => (  
                                     <tr key={index}>
                                         <td className="cell text-center">{request.idSparePart}</td>
-                                        <td className="cell text-center">{new Date (request.startMaintenance).toLocaleDateString()}</td>
+                                        <td className="cell text-center">{new Date (request.arrivalDate).toLocaleDateString('es-ES', { timeZone: 'UTC' })}</td>
                                         <td className="cell text-center">{request.sparePart}</td>
                                         <td className="cell text-center">{request.mechanic}</td>
                                         <td className="cell text-center">

@@ -32,13 +32,16 @@ export default function MaintenanceSelection() {
             <div className="container d-flex justify-content-center align-items-center">
                 <div className="row text-center">
                     <h1>Mecánico</h1>
-                    <div className="d-flex justify-content-between align-items-center mb-2">
-                        <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Buscar</button>
-                        </form>
-                        <Link className="btn btn-primary" to="/maintenanceJob">Mis trabajos</Link>
-                        <a className="btn btn-danger btn-sm" href="">Exportar PDF</a>
+                    <div className="row mb-3">
+                        <div className="justify-content-between ">
+                            <form className="d-flex" role="search">
+                                <input className="form-control w-25 me-2" type="search" placeholder="Search" aria-label="Search" />
+                                <button className="btn btn-outline-success w-25 me-2" type="submit">Buscar</button>
+                                <Link className="btn btn-primary w-25 me-2" to="/maintenanceJob">Mis trabajos</Link>
+                                <Link className="btn btn-primary w-25 me-2" to="/maintenanceStartRequest">Seleccionar</Link>
+                                <a className="btn btn-danger w-25 me-2" href="">Exportar PDF</a>
+                            </form>
+                        </div>
                     </div>
                     <table className="table table-striped table-primary">
                         <thead>
@@ -50,7 +53,6 @@ export default function MaintenanceSelection() {
                                 <th>Modelo</th>
                                 <th>Año fabricación</th>
                                 <th>Plan de mantenimiento</th>
-                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,9 +66,6 @@ export default function MaintenanceSelection() {
                                         <td>{maintenance.model}</td>
                                         <td>{new Date(maintenance.yearManufacture).toLocaleDateString()}</td>
                                         <td>{maintenance.maintenancePlan}</td>
-                                        <td>
-                                            <Link className="btn btn-primary" to="/maintenanceStartRequest">Seleccionar</Link>
-                                        </td>
                                     </tr>
                                 ))
                             ) : (

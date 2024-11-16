@@ -7,7 +7,7 @@ import axios from 'axios';
 
 export default function MaintenanceStartRequest() {
     const [maintenanceData, setMaintenanceData] = useState([]);
-    
+
     // Fetch maintenance data from the backend
     useEffect(() => {
         const fetchMaintenanceData = async () => {
@@ -63,7 +63,6 @@ export default function MaintenanceStartRequest() {
                                 <tr className="cell text-center">
                                     <th>ID</th>
                                     <th>Inicio de reparación</th>
-                                    <th>Repuestos</th>
                                     <th>Fin de reparación</th>
                                     <th>Descripcion</th>
                                     <th>Opciones</th>
@@ -74,9 +73,12 @@ export default function MaintenanceStartRequest() {
                                     maintenanceData.map((maintenance, index) => (
                                         <tr key={index}>
                                             <td>{maintenance.idJob}</td>
-                                            <td>{new Date(maintenance.startMaintenance).toLocaleDateString()}</td>
-                                            <td>{maintenance.sparePart}</td>
-                                            <td>{new Date(maintenance.endMaintenance).toLocaleDateString()}</td>
+                                            <td>{new Date(maintenance.startMaintenance).toLocaleDateString('es-ES', { timeZone: 'UTC' })}</td>
+                                            <td>
+                                                {maintenance.endMaintenance
+                                                    ? new Date(maintenance.endMaintenance).toLocaleDateString('es-ES', { timeZone: 'UTC' })
+                                                    : 'No disponible'}
+                                            </td>
                                             <td>{maintenance.description}</td>
                                             <td>
                                                 <Link className="btn btn-success" to="" onClick={() => finalizeMaintenance(maintenance.idMaintenance)}>Finalizar</Link>
@@ -90,6 +92,7 @@ export default function MaintenanceStartRequest() {
                                     </tr>
                                 )}
                             </tbody>
+
                         </table>
                     </section>
                 </div>

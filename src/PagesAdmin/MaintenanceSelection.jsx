@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '../Navigator/Navigator';
 
 export default function MaintenanceSelection() {
+    
     const [maintenanceDetails, setMaintenanceDetails] = useState([]);
     const [searchType, setSearchType] = useState("maintenanceId"); // Valor inicial del tipo de búsqueda
     const [searchValue, setSearchValue] = useState(""); // Valor de la búsqueda
