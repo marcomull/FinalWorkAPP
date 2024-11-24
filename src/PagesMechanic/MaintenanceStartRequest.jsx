@@ -26,7 +26,7 @@ export default function MaintenanceStartRequest() {
     // Function to finalize maintenance
     const finalizeMaintenance = async (id) => {
         try {
-            const response = await axios.put(`http://localhost:8080/maintenance/finalize/${id}`);
+            const response = await axios.put(`http://localhost:8080/maintenance/finalizeMaintenance/${id}`);
             console.log('Maintenance finalized:', response.data);
             // Optionally update state to reflect the change
             setMaintenanceData((prevData) =>
@@ -40,6 +40,31 @@ export default function MaintenanceStartRequest() {
             console.error("Error finalizing maintenance", error);
         }
     };
+
+    const finalizeJob = async (id) => {
+        try {
+            // Asegúrate de que la URL del endpoint sea la correcta
+            const response = await axios.put(`http://localhost:8080/maintenance/finalizeJob/${id}`);  // Correcta URL de finalización de Job
+            console.log('Job finalized:', response.data);
+    
+            // Actualizamos el estado con la nueva hora de finalización
+            setMaintenanceData((prevData) =>
+                prevData.map((maintenance) =>
+                    maintenance.idJob === id  // Usamos idJob como corresponde
+                        ? { ...maintenance, endMaintenance: new Date() }  // Añadimos la hora actual
+                        : maintenance
+                )
+            );
+        } catch (error) {
+            console.error("Error finalizing job", error);
+        }
+    };
+    
+    const handleFinalize = (idJob, idMaintenance) => {
+        finalizeJob(idJob);          // Llamar a finalizeJob
+        finalizeMaintenance(idMaintenance);  // Llamar a finalizeMaintenance
+    };
+    
 
     return (
         <div>
@@ -62,6 +87,7 @@ export default function MaintenanceStartRequest() {
                             <thead>
                                 <tr className="cell text-center">
                                     <th>ID</th>
+                                    <th>Id mantenieminto</th>
                                     <th>Inicio de reparación</th>
                                     <th>Fin de reparación</th>
                                     <th>Descripcion</th>
@@ -73,6 +99,7 @@ export default function MaintenanceStartRequest() {
                                     maintenanceData.map((maintenance, index) => (
                                         <tr key={index}>
                                             <td>{maintenance.idJob}</td>
+                                            <td>{maintenance.idMaintenance}</td>
                                             <td>{new Date(maintenance.startMaintenance).toLocaleDateString('es-ES', { timeZone: 'UTC' })}</td>
                                             <td>
                                                 {maintenance.endMaintenance
@@ -81,7 +108,7 @@ export default function MaintenanceStartRequest() {
                                             </td>
                                             <td>{maintenance.description}</td>
                                             <td>
-                                                <Link className="btn btn-success" to="" onClick={() => finalizeMaintenance(maintenance.idMaintenance)}>Finalizar</Link>
+                                                <Link className="btn btn-success" to="" onClick={() => handleFinalize(maintenance.idJob, maintenance.idMaintenance)}>Finalizar</Link>
                                                 <Link className="btn btn-success" to="/addRequest">Solicitar</Link>
                                             </td>
                                         </tr>
