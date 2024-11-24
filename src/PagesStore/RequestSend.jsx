@@ -12,7 +12,7 @@ export default function RequestSend() {
     useEffect(() => {
         const fetchRequestData = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/sparePart/listsparePart');
+                const response = await axios.get('http://localhost:8080/sparePart/listSparePart');
                 setRequestData(response.data); // Update state with the fetched data
             } catch (error) {
                 console.error("Error fetching request data", error);
