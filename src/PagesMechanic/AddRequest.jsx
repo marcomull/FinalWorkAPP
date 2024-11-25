@@ -9,7 +9,6 @@ import { useUser } from '../Navigator/UserContext';
 export default function AddRequest() {
 
     const { user } = useUser(); // Obtener el usuario actual del contexto
-    const { id } = useParams();
 
     const getTodayDate = () => {
         const today = new Date();
@@ -20,12 +19,11 @@ export default function AddRequest() {
     };
 
     const [formData, setFormData] = useState({
-        mechanic: user?.id || '', // Inicializar con el id del mecánico
-        arrivalDate: getTodayDate(),
-        sparePart: ''
+        idMechanic: user?.id || '', // Inicializar con el id del mecánico
+        requestDate: getTodayDate(),
+        description: '',
+        state: 'Pendiente'
     });
-
-    const [sparePart, setSparePart] = useState([]); // Estado para almacenar la lista de mantenimiento
 
     const handleChange = (e) => {
         setFormData({
@@ -34,31 +32,24 @@ export default function AddRequest() {
         });
     };
 
-    useEffect(() => {
-        // Obtener la lista de maintenimiento
-        axios.get('http://localhost:8080/sparePart/listSparePart')
-            .then(response => {
-                setSparePart(response.data);
-            })
-            .catch(error => {
-                console.error("Error al cargar la lista de mantenimiento", error);
-            });
-    }, [id]);
-
-
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Datos enviados:", formData); // Asegúrate de que el objeto es correcto
 
-        axios.post('http://localhost:8080/sparePart/addRequest', formData)
-
+        axios.post('http://localhost:8080/request/addRequest', formData)
             .then(response => {
-                console.log('Solicitud agregado exitosamente:', response.data);
-
+                console.log('Solicitud agregada exitosamente:', response.data);
+                alert('¡Solicitud agregada exitosamente!');
             })
             .catch(error => {
-                console.error("Error al agregar la solicitud de repuesto", error);
+                if (error.response) {
+                    console.error("Error en la respuesta:", error.response.data);
+                } else {
+                    console.error("Error al comunicarse con el servidor:", error.message);
+                }
+                alert('Ocurrió un error al agregar la solicitud. Por favor, intenta nuevamente.');
             });
+
     };
 
     return (
@@ -87,32 +78,36 @@ export default function AddRequest() {
                             />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="arrivalDate" className="form-label">Fecha solicitud:</label>
+                            <label htmlFor="requestDate" className="form-label">Fecha solicitud:</label>
                             <input type="date"
-                                id="arrivalDate"
-                                name="arrivalDate"
-                                value={formData.arrivalDate || ""}
+                                id="requestDate"
+                                name="requestDate"
+                                value={formData.requestDate || ""}
                                 className="form-control"
                                 onChange={handleChange}
                                 required />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="sparePart">Repuesto:</label>
-                            <select
-                                className="form-select"
-                                id="sparePart"
-                                name="sparePart"
-                                value={formData.sparePart || ""}
+                            <label htmlFor="description">Descripcion:</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="description"
+                                name="description"
+                                value={formData.description || ""}
                                 onChange={handleChange}
-                                required
-                            >
-                                <option value="">Selecciona un repuesto</option>
-                                {sparePart.map((sparePart) => (
-                                    <option key={sparePart.idSparePart} value={sparePart.idSparePart}>
-                                        {sparePart.idSparePart} - {sparePart.sparePart}
-                                    </option>
-                                ))}
-                            </select>
+                                required />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="state">Estado:</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="state"
+                                name="state"
+                                value={formData.state || ""}
+                                onChange={handleChange}
+                                readOnly />
                         </div>
                         <div className="text-center">
                             <Link className="btn btn-success" to="/RequestStart" onClick={handleSubmit}>Solicitar</Link>
