@@ -12,10 +12,12 @@ export default function RequestSend() {
     useEffect(() => {
         const fetchRequestData = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/sparePart/listSparePart');
+                const response = await axios.get('http://localhost:8080/request/listRequest');
+                console.log(response.data); // Revisa la estructura de los datos aquí
                 setRequestData(response.data); // Update state with the fetched data
             } catch (error) {
                 console.error("Error fetching request data", error);
+                alert("Error al cargar los datos. Intente nuevamente más tarde.");
             }
         };
 
@@ -48,9 +50,11 @@ export default function RequestSend() {
                         <thead>
                             <tr className="cell text-center">
                                 <th>ID</th>
+                                <th>Mecanico</th>
+                                <th>Logistica</th>
                                 <th>Fecha solicitud</th>
-                                <th>Repuesto</th>
-                                <th>Mecánico</th>
+                                <th>Descripcion</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -58,10 +62,12 @@ export default function RequestSend() {
                             {requestData.length > 0 ? (
                                 requestData.map((request, index) => (  
                                     <tr key={index}>
-                                        <td className="cell text-center">{request.idSparePart}</td>
-                                        <td className="cell text-center">{new Date (request.arrivalDate).toLocaleDateString('es-ES', { timeZone: 'UTC' })}</td>
-                                        <td className="cell text-center">{request.sparePart}</td>
+                                        <td className="cell text-center">{request.idRequest}</td>
                                         <td className="cell text-center">{request.mechanic}</td>
+                                        <td className="cell text-center">{request.logistics || "No asignado"}</td>
+                                        <td className="cell text-center">{new Date (request.requestDate).toLocaleDateString('es-ES', { timeZone: 'UTC' })}</td>
+                                        <td className="cell text-center">{request.description}</td>
+                                        <td className="cell text-center">{request.state}</td>
                                         <td className="cell text-center">
                                             <Link className="btn btn-primary" to="/requestSend">Solicitar</Link>
                                             <Link className="btn btn-primary" to="/enviarRepuesto">Enviar Repuesto</Link>
@@ -70,7 +76,7 @@ export default function RequestSend() {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="5">Cargando datos...</td>
+                                    <td colSpan="7">Cargando datos...</td>
                                 </tr>
                             )}
                         </tbody>

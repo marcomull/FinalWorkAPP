@@ -87,7 +87,7 @@ export default function MaintenanceStartRequest() {
                             <thead>
                                 <tr className="cell text-center">
                                     <th>ID</th>
-                                    <th>Id mantenieminto</th>
+                                    <th>ID mantenimiento</th>
                                     <th>Inicio de reparación</th>
                                     <th>Fin de reparación</th>
                                     <th>Descripcion</th>
