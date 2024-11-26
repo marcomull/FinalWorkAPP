@@ -35,11 +35,8 @@ export default function MaintenanceSelection() {
                     <div className="row mb-3">
                         <div className="justify-content-between ">
                             <form className="d-flex" role="search">
-                                <input className="form-control w-25 me-2" type="search" placeholder="Search" aria-label="Search" />
-                                <button className="btn btn-outline-success w-25 me-2" type="submit">Buscar</button>
                                 <Link className="btn btn-primary w-25 me-2" to="/maintenanceJob">Mis trabajos</Link>
                                 <Link className="btn btn-primary w-25 me-2" to="/maintenanceStartRequest">Seleccionar</Link>
-                                <a className="btn btn-danger w-25 me-2" href="">Exportar PDF</a>
                             </form>
                         </div>
                     </div>

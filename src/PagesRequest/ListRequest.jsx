@@ -38,19 +38,8 @@ export default function RequestSend() {
                     <h1>Almacén</h1>
 
                     <div className="row mb-3">
-                        <div className="col-lg-4">
-                            <form className="d-flex" role="search">
-                                <input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" />
-                                <button className="btn btn-outline-success w-50 me-2" type="submit">
-                                    Buscar
-                                </button>
-                            </form>
-                        </div>
                         <div className="col-lg-2">
                             <Link className="btn btn-primary w-100 mx-2" to="/listSpareParts">Repuestos</Link>
-                        </div>
-                        <div className="col-lg-2">
-                            <button className="btn btn-danger w-100 mx-2" type="submit">Exportar Excel</button>
                         </div>
                     </div>
 

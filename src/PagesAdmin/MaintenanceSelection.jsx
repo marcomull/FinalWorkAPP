@@ -108,10 +108,6 @@ export default function MaintenanceSelection() {
                         <div className="col-lg-2">
                             <Link className="btn btn-success w-100 mx-2" to="/addNew">Agregar Nuevo</Link>
                         </div>
-    
-                        <div className="col-lg-2">
-                            <button className="btn btn-danger w-100 mx-2" type="submit">Exportar Excel</button>
-                        </div>
                     </div>
 
                     <table className="table table-striped table-primary" border="1">

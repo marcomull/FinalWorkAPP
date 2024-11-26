@@ -77,11 +77,6 @@ export default function MaintenanceStartRequest() {
                 <div className="row text-center">
                     <h1>Solicitud y comienzo de reparación</h1>
 
-                    <section className="buttons">
-                        <button type="button" className="btn btn-danger">Exportar PDF</button>
-                        <br />
-                    </section>
-
                     <section className="table-container">
                         <table className="table table-striped table-primary">
                             <thead>

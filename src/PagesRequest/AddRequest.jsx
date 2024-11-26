@@ -8,7 +8,9 @@ import { useUser } from '../Navigator/UserContext';
 
 export default function AddRequest() {
 
+    const { id } = useParams();
     const { user } = useUser(); // Obtener el usuario actual del contexto
+    const [logistic, setLogistic] = useState([]); // Estado para almacenar la lista logistica
 
     const getTodayDate = () => {
         const today = new Date();
@@ -20,10 +22,22 @@ export default function AddRequest() {
 
     const [formData, setFormData] = useState({
         idMechanic: user?.id || '', // Inicializar con el id del mecánico
+        idLogistics: '',
         requestDate: getTodayDate(),
         description: '',
         state: 'Pendiente'
     });
+
+    useEffect(() => {
+        // Obtener la lista de repuestos
+        axios.get('http://localhost:8080/logistics/listLogistics')
+            .then(response => {
+                setLogistic(response.data);
+            })
+            .catch(error => {
+                alert("Hubo un error al cargar la lista de logistica. Inténtalo de nuevo.");
+            });
+    }, [id]);
 
     const handleChange = (e) => {
         setFormData({
@@ -76,6 +90,25 @@ export default function AddRequest() {
                                 value={`${user?.id} - ${user?.email}`}
                                 readOnly
                             />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="idLogistics" className="form-label">Logistica</label>
+                            <select
+                                type="text"
+                                className="form-control"
+                                id="idLogistics"
+                                name="idLogistics"
+                                value={formData.idLogistics || ""}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="">Selecciona un logistica</option>
+                                {logistic.map((logis) => (
+                                    <option key={logis.id} value={logis.id}>
+                                        {logis.id} - {logis.email}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="requestDate" className="form-label">Fecha solicitud:</label>
