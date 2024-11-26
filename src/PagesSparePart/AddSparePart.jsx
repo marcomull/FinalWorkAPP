@@ -19,18 +19,18 @@ export default function AddRequestStore() {
                     <h1>Agregar Solicitud</h1>
                     <form>
                         <div className="mb-3">
-                            <label htmlFor="fecha" className="form-label">Fecha:</label>
-                            <input id="fecha" className="form-control" type="date" name="fecha" />
+                            <label htmlFor="fecha" className="form-label">Repuesto:</label>
+                            <input id="fecha" className="form-control" type="text" name="fecha" />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="cantidad" className="form-label">Cantidad:</label>
+                            <label htmlFor="cantidad" className="form-label">Stock:</label>
                             <input id="cantidad" className="form-control" type="text" name="cantidad" />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="repuesto" className="form-label">Repuesto:</label>
+                            <label htmlFor="repuesto" className="form-label">Precio:</label>
                             <input id="repuesto" className="form-control" type="text" name="repuesto" />
                         </div>
-                        <Link className="btn btn-success" to="/addStore">Agregar Solicitud</Link>
+                        <Link className="btn btn-success" to="/listSpareParts">Agregar repuesto</Link>
                     </form>
                 </div>
             </div>
