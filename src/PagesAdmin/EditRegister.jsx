@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '../Navigator/Navigator';
 
 export default function EditRegister() {
+    
     const { id } = useParams();
     const [maintenanceData, setMaintenanceData] = useState({
         vehicleId: '',

@@ -23,7 +23,6 @@ export default function AddJob() {
     const [formData, setFormData] = useState({
         idMaintenance: '',
         startMaintenance: getTodayDate(),
-        //endMaintenance: '',
         idMechanic: user?.id || '' // Inicializar con el id del mecánico
     });
     const [maintenance, setMaintenance] = useState([]); // Estado para almacenar la lista de mantenimiento
@@ -49,8 +48,6 @@ export default function AddJob() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Datos enviados:", formData); // Asegúrate de que el objeto es correcto
-
         axios.post('http://localhost:8080/maintenance/addJob', formData)
 
             .then(response => {

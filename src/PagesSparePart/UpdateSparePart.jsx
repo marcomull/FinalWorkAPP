@@ -5,13 +5,30 @@ import '../Stylesheet/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '../Navigator/Navigator';
 
-export default function AddRequestStore() {
-
+export default function UpdateRequestStore() {
+    const { id } = useParams();
     const [formData, setFormData] = useState({
         sparePart: '',
         stock: '',
         price: ''
     });
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/sparePart/${id}`)
+            .then(response => {
+                const data = response.data;
+                setFormData({
+                    sparePart: data.sparePart || '',
+                    stock: data.stock || '',
+                    price: data.price || '',
+                });
+            })
+            .catch(error => {
+                console.error("Error details:", error);
+
+                alert("Error al cargar los datos de mantenimiento");
+            });
+    }, [id]);
 
     const handleChange = (e) => {
         setFormData({
@@ -20,7 +37,7 @@ export default function AddRequestStore() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleUpdate = (e) => {
         e.preventDefault();
 
         if (!formData.sparePart || !formData.stock || !formData.price) {
@@ -28,9 +45,9 @@ export default function AddRequestStore() {
             return; 
         }
 
-        axios.post('http://localhost:8080/sparePart/addSparePart', formData)
+        axios.put(`http://localhost:8080/sparePart/updateSparePart/${id}` , formData)
             .then(response => {
-                alert('¡Repuesto agregado exitosamente!');
+                alert('¡Repuesto modificado exitosamente!');
             })
             .catch(error => {
                 alert('Ocurrió un error al agregar el repuesto. Por favor, intenta nuevamente.');
@@ -48,8 +65,8 @@ export default function AddRequestStore() {
 
             <div className="container">
                 <div className="col-lg-12">
-                    <h1>Agregar Solicitud</h1>
-                    <form>
+                    <h1>Modificar repuesto</h1>
+                    <form onSubmit={handleUpdate}>
                         <div className="mb-3">
                             <label htmlFor="sparePart" className="form-label">Repuesto:</label>
                             <input
@@ -87,13 +104,13 @@ export default function AddRequestStore() {
                                 step="0.01"         
                                 required />
                         </div>
-                        <Link
+                        <button
                             className={`btn btn-success ${(!formData.sparePart || !formData.stock || !formData.price) ? 'disabled' : ''}`}
                             to="/listSpareParts"
-                            onClick={handleSubmit}
+                            type="submit"
                         >
-                            Agregar repuesto
-                        </Link>
+                            Modificar repuesto
+                        </button>
                     </form>
                 </div>
             </div>

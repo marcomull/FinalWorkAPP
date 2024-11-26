@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '../Navigator/Navigator';
 import axios from 'axios';
+import { useUser } from '../Navigator/UserContext';
 
 export default function RequestSend() {
     const [requestData, setRequestData] = useState([]);
+    const { setIdRequest } = useUser(); // Accede a setIdRequest desde el contexto
 
     // Fetch request data from the backend
     useEffect(() => {
@@ -75,7 +77,13 @@ export default function RequestSend() {
                                         <td className="cell text-center">{request.description}</td>
                                         <td className="cell text-center">{request.state}</td>
                                         <td className="cell text-center">
-                                            <Link className="btn btn-primary" to="/requestSend">Enviar Repuesto</Link>
+                                            <Link
+                                                className="btn btn-primary"
+                                                to="/requestSend"
+                                                onClick={() => setIdRequest(request.idRequest)} // Guarda el idRequest seleccionado
+                                            >
+                                                Enviar Repuesto
+                                            </Link>
                                         </td>
                                     </tr>
                                 ))
