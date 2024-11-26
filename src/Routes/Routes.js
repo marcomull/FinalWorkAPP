@@ -8,8 +8,10 @@ import MaintenanceStartRequest from "../PagesMechanic/MaintenanceStart";
 import AddRequest from "../PagesRequest/AddRequest";
 import ListRequest from "../PagesRequest/ListRequest";
 import RequestSend from "../PagesRequest/RequestSend";
+
 import AddSparePart from "../PagesSparePart/AddSparePart";
 import ListSpareParts from "../PagesSparePart/ListSpareParts";
+import UpdateSparePart from "../PagesSparePart/UpdateSparePart";
 
 import Login from "../PagesLogin/Login"
 import Register from "../PagesLogin/Register"
@@ -42,8 +44,9 @@ function RoutesComponent() {
                 <Route path="/responderRequest" element={<ListRequest/>}/>
                 <Route path="/requestSend" element={<RequestSend/>}/>
 
-                <Route path="/listSpareParts" element={<ListSpareParts/>} />
                 <Route path="/addSparePart" element={<AddSparePart/>}/>
+                <Route path="/listSpareParts" element={<ListSpareParts/>} />
+                <Route path="/editSparePart/:id" element={<UpdateSparePart/>}/>
 
                 <Route path="/exit" element={<Index/>}/>
             </Routes>

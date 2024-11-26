@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '../Navigator/Navigator';
 import axios from 'axios';
 
-export default function SpareParts() {
+export default function ListSpareParts() {
 
     const [requestData, setRequestData] = useState([]);
 
@@ -24,6 +24,21 @@ export default function SpareParts() {
 
         fetchRequestData();
     }, []);
+
+    // Función para manejar la eliminación
+    function handleDelete(id) {
+        if (window.confirm('¿Estás seguro de que deseas eliminar este repuesto?')) {
+            axios.delete(`http://localhost:8080/sparePart/deleteSparePart/${id}`)
+                .then(response => {
+                    alert('Repuesto eliminado exitosamente');
+                    setRequestData(requestData.filter(item => item.idSparePart !== id));
+                })
+                .catch(error => {
+                    console.error('Error al eliminar el mantenimiento', error);
+                    alert('Error al eliminar el mantenimiento');
+                });
+        }
+    }
 
     return (
         <div>
@@ -68,8 +83,8 @@ export default function SpareParts() {
                                         <td className="cell text-center">{request.stock}</td>
                                         <td className="cell text-center">{request.price}</td>
                                         <td className="cell text-center">
-                                            <Link className="btn btn-warning mx-2" to="/editSparePart">Editar</Link>
-                                            <Link className="btn btn-danger btn-sm mx-1" to="/deleteSparePart">Eliminar</Link>
+                                            <Link className="btn btn-warning mx-2" to={`/editSparePart/${request.idSparePart}`}>Editar</Link>
+                                            <Link className="btn btn-danger btn-sm mx-1" onClick={(e) => { e.preventDefault(); handleDelete(request.idSparePart); }}>Eliminar</Link>
                                         </td>
                                     </tr>
                                 ))
