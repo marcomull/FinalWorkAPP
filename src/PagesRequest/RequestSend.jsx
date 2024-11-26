@@ -10,18 +10,38 @@ export default function RequestSend() {
 
     const { id } = useParams();
     const { idRequest } = useUser(); // Obtener la solicitud el id actual del contexto
+
     const [formData, setFormData] = useState({
         idRequest: idRequest || '',
         idSparePart: '',
         quantity: ''
     });
     const [sparePart, setSparePart] = useState([]); // Estado para almacenar la lista de repuestos
+    const [request, setRequest] = useState([]);
 
     const handleChange = (e) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
         });
+    };
+
+    // Function to finalize maintenance
+    const stateComplete = async (id) => {
+        try {
+            const response = await axios.put(`http://localhost:8080/request/stateComplete/${id}`);
+            console.log('Requeste complete:', response.data);
+            // Optionally update state to reflect the change
+            setRequest((prevData) =>
+                prevData.map((request) =>
+                    request.idRequest === id
+                        ? { ...request, state: 'Completo' }
+                        : request
+                )
+            );
+        } catch (error) {
+            console.error("Error completar maintenance", error);
+        }
     };
 
     useEffect(() => {
@@ -94,14 +114,25 @@ export default function RequestSend() {
                                 id="quantity"
                                 name="quantity"
                                 type="number"
-                                min="1"               
+                                min="1"
                                 step="1"
                                 value={formData.quantity || ""}
                                 className="form-control"
                                 onChange={handleChange}
                                 required />
                         </div>
-                        <Link className="btn btn-success" to="/responderRequest" onClick={handleSubmit}>Responder Solicitud</Link>
+                        <Link
+                            className="btn btn-success"
+                            to="/responderRequest"
+                            onClick={(e) => {
+                                e.preventDefault(); // Evita el comportamiento predeterminado del enlace.
+                                handleSubmit(e); // Llama al envío del formulario primero.
+                                stateComplete(formData.idRequest); // Cambia el estado a "Completo".
+                            }}
+                        >
+                            Responder Solicitud
+                        </Link>
+
                     </form>
                 </div>
             </div>

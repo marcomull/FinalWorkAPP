@@ -53,15 +53,8 @@ export default function ListSpareParts() {
                 <div className="row text-center">
                     <h1>Almacen</h1>
                     <div className="d-flex justify-content-between align-items-center mb-2">
-                        <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                        <div className="col-lg-2">
+                        <div className="col-lg-4">
                             <Link className="btn btn-primary w-100 mx-2" to="/addSparePart">Agregar repuesto</Link>
-                        </div>
-                        <div className="col-lg-2">
-                            <button className="btn btn-danger w-100 mx-2" type="submit">Exportar Excel</button>
                         </div>
                     </div>
                     <table className="table table-striped table-primary" border="1">
