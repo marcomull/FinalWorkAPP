@@ -4,15 +4,18 @@ import MaintenanceSelection from "../PagesAdmin/MaintenanceSelection";
 import EditRegister from "../PagesAdmin/EditRegister";
 import AddRegister from "../PagesAdmin/AddRegister"
 import MaintenanceSelectionMechanic from "../PagesMechanic/MaintenanceSelection";
-import MaintenanceStartRequest from "../PagesMechanic/MaintenanceStartRequest";
-import AddRequest from "../PagesMechanic/AddRequest";
-import RequestSend from "../PagesStore/RequestSend";
-import SpareParts from "../PagesStore/SpareParts";
-import AddRequestStore from "../PagesStore/AddRequestStore";
+import MaintenanceStartRequest from "../PagesMechanic/MaintenanceStart";
+import AddRequest from "../PagesRequest/AddRequest";
+import ListRequest from "../PagesRequest/ListRequest";
+import RequestSend from "../PagesRequest/RequestSend";
+import AddSparePart from "../PagesSparePart/AddSparePart";
+import ListSpareParts from "../PagesSparePart/ListSpareParts";
+
 import Login from "../PagesLogin/Login"
 import Register from "../PagesLogin/Register"
 import Index from "../PageIndex/Index";
 import AddJob from "../PagesMechanic/AddJob";
+
 
 
 function RoutesComponent() {
@@ -28,17 +31,20 @@ function RoutesComponent() {
                 <Route path="/maintenanceJob" element={<MaintenanceStartRequest/>}/>
                 <Route path="/maintenanceStartRequest" element={<AddJob/>} />
                 <Route path="/addRequest" element={<AddRequest/>} />
-                <Route path="/logistica" element={<RequestSend/>} />
-                <Route path="/requestSend" element={<SpareParts/>} />
-                <Route path="/addRequestStore" element={<AddRequestStore/>}/>
+                <Route path="/logistica" element={<ListRequest/>} />
                 <Route path="/register" element={<Register/>} />
                 <Route path="/registrar" element={<Login/>} />
                 <Route path="/MaintenanceSelection" element={<MaintenanceSelection/>}/>
                 <Route path="/EditSelection" element={<MaintenanceSelection/>}/>
                 <Route path="/deleteRegister" element={<MaintenanceSelection/>}/>
+
                 <Route path="/RequestStart" element={<MaintenanceStartRequest/>}/>
-                <Route path="/enviarRepuesto" element={<RequestSend/>}/>
-                <Route path="/addStore" element={<RequestSend/>}/>
+                <Route path="/responderRequest" element={<ListRequest/>}/>
+                <Route path="/requestSend" element={<RequestSend/>}/>
+
+                <Route path="/listSpareParts" element={<ListSpareParts/>} />
+                <Route path="/addSparePart" element={<AddSparePart/>}/>
+
                 <Route path="/exit" element={<Index/>}/>
             </Routes>
         </BrowserRouter>

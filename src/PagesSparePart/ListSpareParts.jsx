@@ -5,14 +5,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '../Navigator/Navigator';
 import axios from 'axios';
 
-export default function RequestSend() {
+export default function SpareParts() {
+
     const [requestData, setRequestData] = useState([]);
 
     // Fetch request data from the backend
     useEffect(() => {
         const fetchRequestData = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/request/listRequest');
+                const response = await axios.get('http://localhost:8080/sparePart/listSparePart');
                 console.log(response.data); // Revisa la estructura de los datos aquí
                 setRequestData(response.data); // Update state with the fetched data
             } catch (error) {
@@ -29,48 +30,46 @@ export default function RequestSend() {
             <header>
                 <h1 className="titulo">Transportes la libertad<span>Agency</span></h1>
             </header>
-            <NavigationBar />
+            <NavigationBar>
+
+            </NavigationBar>
 
             <div className="container d-flex justify-content-center align-items-center">
                 <div className="row text-center">
-                    <h1>Almacén</h1>
+                    <h1>Almacen</h1>
                     <div className="d-flex justify-content-between align-items-center mb-2">
                         <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" />
-                            <button className="btn btn-outline-success" type="submit">
-                                Buscar
-                            </button>
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <button className="btn btn-outline-success" type="submit">Search</button>
                         </form>
-                        <a className="btn btn-danger btn-sm" href="">
-                            Exportar PDF
-                        </a>
+                        <div className="col-lg-2">
+                            <Link className="btn btn-primary w-100 mx-2" to="/addSparePart">Agregar repuesto</Link>
+                        </div>
+                        <div className="col-lg-2">
+                            <button className="btn btn-danger w-100 mx-2" type="submit">Exportar Excel</button>
+                        </div>
                     </div>
-
-                    <table className="table table-striped table-primary">
+                    <table className="table table-striped table-primary" border="1">
                         <thead>
                             <tr className="cell text-center">
-                                <th>ID</th>
-                                <th>Mecanico</th>
-                                <th>Logistica</th>
-                                <th>Fecha solicitud</th>
-                                <th>Descripcion</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
+                                <th className="cell text-center">ID</th>
+                                <th className="cell text-center">Repuesto</th>
+                                <th className="cell text-center">Stock</th>
+                                <th className="cell text-center">Precio</th>
+                                <th className="cell text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             {requestData.length > 0 ? (
-                                requestData.map((request, index) => (  
+                                requestData.map((request, index) => (
                                     <tr key={index}>
-                                        <td className="cell text-center">{request.idRequest}</td>
-                                        <td className="cell text-center">{request.mechanic}</td>
-                                        <td className="cell text-center">{request.logistics || "No asignado"}</td>
-                                        <td className="cell text-center">{new Date (request.requestDate).toLocaleDateString('es-ES', { timeZone: 'UTC' })}</td>
-                                        <td className="cell text-center">{request.description}</td>
-                                        <td className="cell text-center">{request.state}</td>
+                                        <td className="cell text-center">{request.idSparePart}</td>
+                                        <td className="cell text-center">{request.sparePart}</td>
+                                        <td className="cell text-center">{request.stock}</td>
+                                        <td className="cell text-center">{request.price}</td>
                                         <td className="cell text-center">
-                                            <Link className="btn btn-primary" to="/requestSend">Solicitar</Link>
-                                            <Link className="btn btn-primary" to="/enviarRepuesto">Enviar Repuesto</Link>
+                                            <Link className="btn btn-warning mx-2" to="/editSparePart">Editar</Link>
+                                            <Link className="btn btn-danger btn-sm mx-1" to="/deleteSparePart">Eliminar</Link>
                                         </td>
                                     </tr>
                                 ))

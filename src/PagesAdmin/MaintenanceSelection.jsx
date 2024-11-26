@@ -76,8 +76,8 @@ export default function MaintenanceSelection() {
             <div className="container d-flex justify-content-center align-items-center">
                 <div className="row text-center">
                     <h1>Administrador</h1>
-                    <div className="row mb-3">
 
+                    <div className="row mb-3">
                         <div className="col-lg-8">
                             <form className="d-flex" role="search" onSubmit={handleSearch}>
                                 <input
@@ -108,6 +108,7 @@ export default function MaintenanceSelection() {
                         <div className="col-lg-2">
                             <Link className="btn btn-success w-100 mx-2" to="/addNew">Agregar Nuevo</Link>
                         </div>
+    
                         <div className="col-lg-2">
                             <button className="btn btn-danger w-100 mx-2" type="submit">Exportar Excel</button>
                         </div>
